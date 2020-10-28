@@ -44,13 +44,11 @@ var config = {
 Obtain an api key at [Google Developer's page](https://developers.google.com/maps/documentation/javascript/).
 
 ## Notification
-Use `UPDATE_POSITION` notification for updating the location. Pass latitude and longitude in a payload object:
+Use `UPDATE_POSITION` notification for updating the location. Pass latitude and longitude in a simple javascript object:
 ```js
 	{
-		payload:{
-			lat: <LATITUDE>,
-			lon: <LONGITUDE>
-				}
+		lat: <LATITUDE>,
+		lon: <LONGITUDE>
 	}
 ```
 
