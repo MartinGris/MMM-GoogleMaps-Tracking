@@ -44,7 +44,7 @@ var config = {
 Obtain an api key at [Google Developer's page](https://developers.google.com/maps/documentation/javascript/).
 
 ## Notification
-Use 'UPDATE_POSITION' notification for updating the location. Pass latitude and longitude in a payload object:
+Use `UPDATE_POSITION` notification for updating the location. Pass latitude and longitude in a payload object:
 ```js
 	{
 		payload:{
@@ -54,7 +54,7 @@ Use 'UPDATE_POSITION' notification for updating the location. Pass latitude and 
 	}
 ```
 
-You can use the [MMM-Remote-Control](https://github.com/Jopyth/MMM-Remote-Control) module and the rest api for remote access. For example this simple GET request will update the marker on the map: 'http://magicmirror:8080/api/notification/UPDATE_POSITION/lat?lat=<LATITUDE>&lon=<LONGITUDE>'
+You can use the [MMM-Remote-Control](https://github.com/Jopyth/MMM-Remote-Control) module and the rest api for remote access. For example this simple GET request will update the marker on the map: `http://magicmirror:8080/api/notification/UPDATE_POSITION/lat?lat=<LATITUDE>&lon=<LONGITUDE>`
 
 
 ## Buy me a beer
