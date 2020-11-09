@@ -5,7 +5,11 @@ Module.register("MMM-GoogleMaps-Tracking",{
 	apikey: 'your_api_key',
 	lat: 'latitude',
     lon: 'longitude',
-    initialLoadDelay: 1000
+    initialLoadDelay: 1000,
+    marker:[
+    ]
+
+    
     },
     
     getScripts: function() {
@@ -82,22 +86,29 @@ Module.register("MMM-GoogleMaps-Tracking",{
         mapElement.classList.add("map-canvas");
         wrapper.appendChild(mapElement);
 
-        var latitutde = this.config.lat;
-        var longitude = this.config.lon;
+        function calculateCenter(config){
+            if(config.lat && config.lon){
+                return [config.lat, config.lon];
+            }
 
+            totalLat = 0;
+            totalLon = 0;
+            for(let i = 0; i < self.config.marker.length; i++){
+                totalLat += parseFloat(self.config.marker[i].lat);
+                totalLon += parseFloat(self.config.marker[i].lon);
+            }
+
+            centerLat = totalLat / self.config.marker.length;
+            centerLon = totalLon / self.config.marker.length;
+            return [centerLat,centerLon];
+        }
         setTimeout(function() {
            
             // Map
-            Log.info("latitutde: " + latitutde);
-            Log.info("longitude: " + longitude);
             self.map  = new google.maps.Map(
                 document.getElementById(self.mapId), 
                     {
-                        center:{
-                                lat:parseFloat(self.config.lat),
-                                lng:parseFloat(self.config.lon)
-                        },
-                    zoom:16, 
+                    zoom:self.config.zoom, 
                     styles: mapStyles,
                     zoomControl:false,
                     streetViewControl:false,
@@ -107,15 +118,62 @@ Module.register("MMM-GoogleMaps-Tracking",{
                     mapTypeControl:false,
                     fullscreenControl:false
                 });
-            // Marker
-            self.mark = new google.maps.Marker({
-                position:{
-                    lat:parseFloat(self.config.lat),
-                    lng:parseFloat(self.config.lon)
-                },
-                animation: google.maps.Animation.DROP,
-                map:self.map
-            });
+
+            //if no markers are defined, use the center coordinates for marker. just for backward compatibility
+            if(!self.config.marker || self.config.marker.length == 0){
+                self.config.marker = [];
+                self.config.marker[0] = new Object();
+                self.config.marker[0].lat = self.config.lat;
+                self.config.marker[0].lon = self.config.lon;
+            }
+
+            bounds  = new google.maps.LatLngBounds();
+            //set marker
+            for(let i = 0; i < self.config.marker.length; i++){
+                //default maps marker
+                iconURL ="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png";
+                if(self.config.marker[i].icon){
+                    iconURL = self.config.marker[i].icon;
+                }
+                latitude = parseFloat(self.config.marker[i].lat);
+                longitude = parseFloat(self.config.marker[i].lon);
+
+                marker = new google.maps.Marker({
+                    position:{
+                        lat:latitude,
+                        lng:longitude
+                    },
+                    animation: google.maps.Animation.DROP,
+                    icon: iconURL,
+                    map:self.map
+                });
+
+                latLng = new google.maps.LatLng(latitude, longitude);
+                bounds.extend(latLng);
+            }
+
+            //center and zoom handling
+
+            centerLatLon = calculateCenter(self.config);
+
+            if(self.config.zoom){
+                self.map.setZoom(self.config.zoom);
+                self.map.setCenter(new google.maps.LatLng(
+                    centerLatLon[0],
+                    centerLatLon[1]
+                  ));
+            }
+            else{
+                self.map.fitBounds(bounds); //autozoom
+
+                //setting center needs to be done after fitBounds is finished
+                google.maps.event.addListenerOnce(self.map,'bounds_changed', function() {
+                    self.map.setCenter(new google.maps.LatLng(
+                        centerLatLon[0],
+                        centerLatLon[1]
+                      ));
+              });
+            }
 
         }, self.config.initialLoadDelay);
 
@@ -123,14 +181,33 @@ Module.register("MMM-GoogleMaps-Tracking",{
 
     },
     notificationReceived: function(notification, payload, sender) {
-          
-        if(notification === "UPDATE_POSITION"){
-            if(payload.lat && payload.lon && (this.config.lat != payload.lat || this.config.lon != payload.lon)){
-                this.config.lat = payload.lat;
-                this.config.lon = payload.lon;
-                this.updateDom();
+        var self = this;
+        function detectChanges(payload){
+            if(payload.lat && payload.lon && (self.config.lat != payload.lat || self.config.lon != payload.lon)){
+                return true;
             }
 
+            if(payload.marker && payload.marker.length != self.config.marker.length){
+                return true;
+            }
+            if(payload.marker){
+                for(let i = 0; i < payload.marker.length; i++){
+                    if(payload.marker[i].lat != self.config.marker[i].lat || payload.marker[i].lon != self.config.marker[i].lon ||payload.marker[i].icon != self.config.marker[i].icon){
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        }
+          
+        if(notification === "UPDATE_POSITION"){
+            if(detectChanges(payload)){
+                self.config.lat = payload.lat;
+                self.config.lon = payload.lon;
+                self.config.marker = payload.marker;
+                self.updateDom();
+            }
         }
     }
 });
