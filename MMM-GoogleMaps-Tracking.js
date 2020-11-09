@@ -174,7 +174,11 @@ Module.register("MMM-GoogleMaps-Tracking",{
                       ));
               });
             }
-
+            //optional mapType overwrite mapStyle json 
+            if(self.config.mapType){
+                self.map.setMapTypeId(self.config.mapType);
+            }
+            
         }, self.config.initialLoadDelay);
 
         return wrapper;
