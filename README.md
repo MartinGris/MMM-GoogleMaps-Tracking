@@ -46,7 +46,6 @@ var config = {
 | `lat`  			   | *Optional* Latitude used for centering the map (remove option for center calculation by markers)  <br>**Type:** `string` 
 | `lon`  			   | *Optional* Longitude used for centering the map (remove option for center calculation by markers)  <br>**Type:** `string`
 | `zoom`  			   | *Optional* Zoomlevel. Check google docs for more infos. remove option for automated fit of bounds by markers. Usage is recommended if only one marker is set <br>**Type:** `int`
-
 | `marker`  		   | *Required* List of markers defined by latitude and longitude. <br>**Type:** `string`
 | `icon`  			   | *Optional* URL to custom icon  <br>**Type:** `string` <br>**Default:** google red spotlight icon
 
