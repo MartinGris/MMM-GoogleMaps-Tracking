@@ -5,6 +5,8 @@ Module.register("MMM-GoogleMaps-Tracking",{
 	apikey: 'your_api_key',
 	lat: 'latitude',
     lon: 'longitude',
+    label: 'Test',
+	labelStyle: "{opacity: 0.75}",
     initialLoadDelay: 1000,
     marker:[
     ]
@@ -14,9 +16,11 @@ Module.register("MMM-GoogleMaps-Tracking",{
     
     getScripts: function() {
         return [
-            this.file('map-styles.js')
+            this.file('map-styles.js'),
+			this.file('node_modules/@googlemaps/markerwithlabel/dist/index.min.js'),
         ];
     },
+
     getStyles: function() {	
 		return ['MMM-GoogleMaps-Tracking.css']	
 	},
@@ -125,6 +129,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 self.config.marker[0] = new Object();
                 self.config.marker[0].lat = self.config.lat;
                 self.config.marker[0].lon = self.config.lon;
+                self.config.marker[0].label = self.config.label;
             }
 
             bounds  = new google.maps.LatLngBounds();
@@ -135,17 +140,28 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 if(self.config.marker[i].icon){
                     iconURL = self.config.marker[i].icon;
                 }
+                if(self.config.marker[i].label){
+                    iconLabel = self.config.marker[i].label;
+                }else{
+					var iconLabel = ""
+				}
+
                 latitude = parseFloat(self.config.marker[i].lat);
                 longitude = parseFloat(self.config.marker[i].lon);
 
-                marker = new google.maps.Marker({
+				marker = new MarkerWithLabel({
+                //marker = new google.maps.Marker({
                     position:{
                         lat:latitude,
                         lng:longitude
                     },
                     animation: google.maps.Animation.DROP,
                     icon: iconURL,
-                    map:self.map
+					labelContent: iconLabel,
+					labelAnchor: new google.maps.Point(-24, -80),
+					labelClass: "maplabels", // the CSS class for the label
+					labelStyle: self.config.labelStyle,
+                    map:self.map,
                 });
 
                 latLng = new google.maps.LatLng(latitude, longitude);
@@ -196,7 +212,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
             }
             if(payload.marker){
                 for(let i = 0; i < payload.marker.length; i++){
-                    if(payload.marker[i].lat != self.config.marker[i].lat || payload.marker[i].lon != self.config.marker[i].lon ||payload.marker[i].icon != self.config.marker[i].icon){
+                    if(payload.marker[i].label != self.config.marker[i].label || payload.marker[i].lat != self.config.marker[i].lat || payload.marker[i].lon != self.config.marker[i].lon ||payload.marker[i].icon != self.config.marker[i].icon){
                         return true;
                     }
                 }
@@ -207,6 +223,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
           
         if(notification === "UPDATE_POSITION"){
             if(detectChanges(payload)){
+                self.config.lat = payload.label;
                 self.config.lat = payload.lat;
                 self.config.lon = payload.lon;
                 self.config.marker = payload.marker;
