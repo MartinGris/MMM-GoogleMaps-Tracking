@@ -9,6 +9,12 @@ To use this module, clone this repo to your `MagicMirror/modules/` directory.
 
 `git clone https://github.com/MartinGris/MMM-GoogleMaps-Tracking`
 
+install dependencies:
+
+`cd MMM-GoogleMaps-Tracking`
+
+`npm install`
+
 And add the following configuration block to the modules array in the `config/config.js` file:
 ```js
 var config = {
@@ -26,6 +32,7 @@ var config = {
 			   mapType: '<MAP_TYPE>',
    			   marker:[
 				{
+					label: '<LABEL>',
 					lat: '<LATITUDE>',
 					lon: '<LONGITUDE>',
 					icon: 'ICON_URL'
@@ -47,9 +54,12 @@ var config = {
 | `lat`  			   | *Optional* Latitude used for centering the map (remove option for center calculation by markers)  <br>**Type:** `string` 
 | `lon`  			   | *Optional* Longitude used for centering the map (remove option for center calculation by markers)  <br>**Type:** `string`
 | `zoom`  			   | *Optional* Zoomlevel. Check google docs for more infos. remove option for automated fit of bounds by markers. Usage is recommended if only one marker is set <br>**Type:** `int`
+| `labelAnchorH`  		   | *Optional* Sets the horizontal offset of the anchor point of the label.<br>**Type:** `int`<br>**Default:** 0
+| `labelAnchorV`  		   | *Optional* Sets the vertical offset of the anchor point of the label.<br>**Type:** `int`<br>**Default:** 0
 | `mapType`  		   | *Optional* This overwrites the styles property which can be set in map-styles.js. Possbile values: HYBRID, ROADMAP, SATELLITE, TERRAIN. see [Google MapTypeId constants](https://developers.google.com/maps/documentation/javascript/reference/map#MapTypeId)<br>**Type:** `string`
 | `marker`  		   | *Required* List of markers defined by latitude and longitude. <br>**Type:** `string`
 | `icon`  			   | *Optional* URL to custom icon  <br>**Type:** `string` <br>**Default:** google red spotlight icon
+| `label`  			   | *Optional* To add a text label to the marker<br>**Type:** `string` <br>**Default:** none
 
 
 ## Google API Key
@@ -64,16 +74,19 @@ Use `UPDATE_POSITION` notification for setting or updating the markers. Pass lat
 		lon: "<LONGITUDE>"
 		marker:[
 			{        
+				label: "<LABEL>",
 				lat: "<LATITUDE>",
 				lon: "<LONGITUDE>"
 				icon: "ICON_URL"
 			},
 			{        
+				label: "<LABEL>",
 				lat: "<LATITUDE>",
 				lon: "<LONGITUDE>"
 				icon: "ICON_URL"
 			},
 			{        
+				label: "<LABEL>",
 				lat: "<LATITUDE>",
 				lon: "<LONGITUDE>"
 				icon: "ICON_URL"
@@ -90,6 +103,9 @@ You can use the [MMM-Remote-Control](https://github.com/Jopyth/MMM-Remote-Contro
 To use a custom icon for a marker enter a valid url to an image file. Keep care of the size of the image. There is no rescaling.
 
 For example: I place my icons in a subfolder of the module called "icons". A valid url can be `http://magicmirror:8080/modules/MMM-GoogleMaps-Tracking/icons/icon.png`.
+
+## Label
+The label can be any string, you can format it with CSS in the custom.css file if you want.
 
 ## Map-Style
 
