@@ -5,14 +5,11 @@ Module.register("MMM-GoogleMaps-Tracking",{
 	apikey: 'your_api_key',
 	lat: 'latitude',
     lon: 'longitude',
-    label: 'Test',
-	labelStyle: "{opacity: 0.75}",
+	labelAnchorH: 0,
+	labelAnchorV: 0,
     initialLoadDelay: 1000,
     marker:[
-    ]
-
-    
-    },
+    ]},
     
     getScripts: function() {
         return [
@@ -129,7 +126,6 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 self.config.marker[0] = new Object();
                 self.config.marker[0].lat = self.config.lat;
                 self.config.marker[0].lon = self.config.lon;
-                self.config.marker[0].label = self.config.label;
             }
 
             bounds  = new google.maps.LatLngBounds();
@@ -142,15 +138,16 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 }
                 if(self.config.marker[i].label){
                     iconLabel = self.config.marker[i].label;
+					labelClass = "maplabels";
                 }else{
-					var iconLabel = ""
+					var iconLabel = "";
+					var labelClass = "";
 				}
 
                 latitude = parseFloat(self.config.marker[i].lat);
                 longitude = parseFloat(self.config.marker[i].lon);
 
 				marker = new MarkerWithLabel({
-                //marker = new google.maps.Marker({
                     position:{
                         lat:latitude,
                         lng:longitude
@@ -158,9 +155,9 @@ Module.register("MMM-GoogleMaps-Tracking",{
                     animation: google.maps.Animation.DROP,
                     icon: iconURL,
 					labelContent: iconLabel,
-					labelAnchor: new google.maps.Point(-24, -80),
-					labelClass: "maplabels", // the CSS class for the label
-					labelStyle: self.config.labelStyle,
+					// Should we put this in the markers array as well??
+					labelAnchor: new google.maps.Point(self.config.labelAnchorH, self.config.labelAnchorV),
+					labelClass: labelClass,
                     map:self.map,
                 });
 
