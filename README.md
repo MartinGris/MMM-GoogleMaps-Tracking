@@ -23,6 +23,7 @@ var config = {
 			   lat: '<LATITUDE_CENTER>',
 			   lon: '<LONGITUDE_CENTER>',
 			   zoom: <ZOOM>,
+			   mapType: '<MAP_TYPE>',
    			   marker:[
 				{
 					lat: '<LATITUDE>',
