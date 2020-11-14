@@ -2,3 +2,14 @@
     width: 300px;
     height: 400px;
 }
+.maplabels {
+  color: black;
+  background-color: white;
+  /*font-family: "Lucida Grande", "Arial", sans-serif;*/
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 47px;
+  /*border: 2px solid black;*/
+  white-space: nowrap;
+ }
