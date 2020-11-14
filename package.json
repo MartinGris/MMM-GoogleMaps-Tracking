@@ -1,5 +1,5 @@
 {
-  "name": "Magic-Mirror-Module-GoogleMaps-Tracking",
+  "name": "MMM-GoogleMaps-Tracking",
   "version": "2.1.0",
   "description": "This module for the Magic Mirror to be able to show markers on a GoogleMap",
   "repository": {
