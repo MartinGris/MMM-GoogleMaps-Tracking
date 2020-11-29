@@ -3,6 +3,8 @@
 
 A module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/) for tracking a geo-location with google maps and MagicMirror notifications.
 
+![Alt text](/screenshot.png "Example Screenshot of MMM-GoogleMaps-Tracking")
+
 ## Using the module
 
 To use this module, clone this repo to your `MagicMirror/modules/` directory.
