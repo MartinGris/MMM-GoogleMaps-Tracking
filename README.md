@@ -3,7 +3,7 @@
 
 A module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/) for tracking a geo-location with google maps and MagicMirror notifications.
 
-![Alt text](/screenshot.png "Example Screenshot of MMM-GoogleMaps-Tracking")
+![Alt text](/examples/screenshot.png "Example Screenshot of MMM-GoogleMaps-Tracking")
 
 ## Using the module
 
@@ -112,6 +112,11 @@ The label can be any string, you can format it with CSS in the custom.css file i
 ## Map-Style
 
 You can generate your own map-style on https://mapstyle.withgoogle.com/. Then overwrite the json in the map-styles.js file to use your own style.
+
+## Credits
+Thanks to [Snille](https://github.com/Snille) for developing the label-feature. Here's an example of his usage. He tracks his cats outside with GPS trackers and a pet door for in/out status.
+
+![Alt text](/examples/screenshotSnille.png "Example Screenshot of MMM-GoogleMaps-Tracking by Snille")
 
 ## Buy me a beer
 Find it useful? Please consider buying me or other contributors a beer.
