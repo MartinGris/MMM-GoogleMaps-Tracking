@@ -85,9 +85,9 @@ Module.register("MMM-GoogleMaps-Tracking",{
         mapElement.classList.add("map-canvas");
         wrapper.appendChild(mapElement);
 
-        function calculateCenter(config){
-            if(config.lat && config.lon){
-                return [config.lat, config.lon];
+        function calculateCenter(){
+            if(self.config.lat && self.config.lon){
+                return [self.config.lat, self.config.lon];
             }
 
             totalLat = 0;
@@ -165,7 +165,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
 
             //center and zoom handling
 
-            centerLatLon = calculateCenter(self.config);
+            centerLatLon = calculateCenter();
 
             if(self.config.zoom){
                 self.map.setZoom(self.config.zoom);
