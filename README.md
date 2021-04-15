@@ -52,7 +52,7 @@ var config = {
 
 | Option               | Description
 |--------------------- |-----------
-| `key`                | *Required* Google api key. See below for help. <br>**Type:** `string`
+| `apikey`                | *Required* Google api key. See below for help. <br>**Type:** `string`
 | `lat`  			   | *Optional* Latitude used for centering the map (remove option for center calculation by markers)  <br>**Type:** `string` 
 | `lon`  			   | *Optional* Longitude used for centering the map (remove option for center calculation by markers)  <br>**Type:** `string`
 | `zoom`  			   | *Optional* Zoomlevel. Check google docs for more infos. remove option for automated fit of bounds by markers. Usage is recommended if only one marker is set <br>**Type:** `int`
