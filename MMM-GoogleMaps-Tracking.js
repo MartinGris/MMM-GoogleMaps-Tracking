@@ -3,8 +3,6 @@ Module.register("MMM-GoogleMaps-Tracking",{
     // Default module config.
     defaults: {
 	apikey: 'your_api_key',
-	lat: 'latitude',
-    lon: 'longitude',
 	labelAnchorH: 0,
 	labelAnchorV: 0,
     initialLoadDelay: 1000,
