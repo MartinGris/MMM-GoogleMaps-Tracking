@@ -58,6 +58,8 @@ var config = {
 | `zoom`  			   | *Optional* Zoomlevel. Check google docs for more infos. remove option for automated fit of bounds by markers. Usage is recommended if only one marker is set <br>**Type:** `int`
 | `labelAnchorH`  		   | *Optional* Sets the horizontal offset of the anchor point of the label.<br>**Type:** `int`<br>**Default:** 0
 | `labelAnchorV`  		   | *Optional* Sets the vertical offset of the anchor point of the label.<br>**Type:** `int`<br>**Default:** 0
+| `offsetLat`                      | *Optional* Sets the latitude center offset on map updates (good if you have big lables).<br>**Type** 'int'<br> **dafult** 0
+| `offsetLon`                      | *Optional* Sets the longitude center offset on map updates (good if you have big lables).<br>**Type** 'int'<br> **dafult** 0
 | `mapType`  		   | *Optional* This overwrites the styles property which can be set in map-styles.js. Possbile values: hybrid, roadmap, satellite, terrain. Must be lower case. see [Google MapTypeId constants](https://developers.google.com/maps/documentation/javascript/reference/map#MapTypeId)<br>**Type:** `string`
 | `marker`  		   | *Required* List of markers defined by latitude and longitude. <br>**Type:** `string`
 | `icon`  			   | *Optional* URL to custom icon  <br>**Type:** `string` <br>**Default:** google red spotlight icon
