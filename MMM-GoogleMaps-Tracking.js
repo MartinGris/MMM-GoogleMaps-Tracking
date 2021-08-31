@@ -5,6 +5,8 @@ Module.register("MMM-GoogleMaps-Tracking",{
 	apikey: 'your_api_key',
 	labelAnchorH: 0,
 	labelAnchorV: 0,
+	offsetLat: 0,
+	offsetLon: 0,
     initialLoadDelay: 1000,
     marker:[
     ]},
@@ -99,7 +101,9 @@ Module.register("MMM-GoogleMaps-Tracking",{
 
             centerLat = totalLat / self.config.marker.length;
             centerLon = totalLon / self.config.marker.length;
-            return [centerLat,centerLon];
+			calcLat = centerLat + self.config.offsetLat;
+			calcLon = centerLon + self.config.offsetLon;
+            return [calcLat,calcLon];
         }
         setTimeout(function() {
            
