@@ -92,15 +92,33 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 return [self.config.lat, self.config.lon];
             }
 
-            totalLat = 0;
-            totalLon = 0;
+            //totalLat = 0;
+            //totalLon = 0;
+	    maxLat = -90;
+	    minLat = 90;
+	    maxLon = -180;
+	    minLon = 180;
             for(let i = 0; i < self.config.marker.length; i++){
-                totalLat += parseFloat(self.config.marker[i].lat);
-                totalLon += parseFloat(self.config.marker[i].lon);
+                //totalLat += parseFloat(self.config.marker[i].lat);
+                //totalLon += parseFloat(self.config.marker[i].lon);
+		if(parseFloat(self.config.marker[i].lat) > maxLat){
+			maxLat = parseFloat(self.config.marker[i].lat);
+		}
+		if(parseFloat(self.config.marker[i].lat) < minLat){
+			minLat = parseFloat(self.config.marker[i].lat);
+		}
+		if(parseFloat(self.config.marker[i].lon) > maxLon){
+			maxLon = parseFloat(self.config.marker[i].lon);
+		}
+		if(parseFloat(self.config.marker[i].lon) < minLon){
+			minLon = parseFloat(self.config.marker[i].lon);
+		}
             }
-
-            centerLat = totalLat / self.config.marker.length;
-            centerLon = totalLon / self.config.marker.length;
+	    
+            //centerLat = totalLat / self.config.marker.length;
+            //centerLon = totalLon / self.config.marker.length;
+	    centerLat = (maxLat + minLat) / 2;
+            centerLon = (maxLon + minLon) / 2;
 			calcLat = centerLat + self.config.offsetLat;
 			calcLon = centerLon + self.config.offsetLon;
             return [calcLat,calcLon];
