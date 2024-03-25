@@ -1,7 +1,7 @@
 # MMM-GoogleMaps-Tracking
 
 
-A module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/) for tracking a geo-location with google maps and MagicMirror notifications.
+A module for the [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror/) for tracking a geo-location with google maps and MagicMirror notifications.
 
 ![Alt text](/examples/screenshot.png "Example Screenshot of MMM-GoogleMaps-Tracking")
 
