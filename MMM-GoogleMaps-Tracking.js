@@ -24,7 +24,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
     start: function () {
 		self = this;
 		self.loaded = false;
-		var scriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + self.config.apikey;
+		var scriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + self.config.apikey + '&loading=async';
         Log.info("Starting module: " + this.name);
 		
         function hasMapsScript(src){
