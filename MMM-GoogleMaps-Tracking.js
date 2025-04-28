@@ -167,7 +167,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 latitude = parseFloat(self.config.marker[i].lat);
                 longitude = parseFloat(self.config.marker[i].lon);
 
-				marker = new MarkerWithLabel({
+				marker = new markerWithLabel.MarkerWithLabel({
                     position:{
                         lat:latitude,
                         lng:longitude
