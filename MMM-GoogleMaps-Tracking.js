@@ -24,7 +24,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
     start: function () {
 		self = this;
 		self.loaded = false;
-		var scriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + self.config.apikey;
+		var scriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + self.config.apikey + '&loading=async';
         Log.info("Starting module: " + this.name);
 		
         function hasMapsScript(src){
@@ -167,7 +167,7 @@ Module.register("MMM-GoogleMaps-Tracking",{
                 latitude = parseFloat(self.config.marker[i].lat);
                 longitude = parseFloat(self.config.marker[i].lon);
 
-				marker = new MarkerWithLabel({
+				marker = new markerWithLabel.MarkerWithLabel({
                     position:{
                         lat:latitude,
                         lng:longitude

@@ -20,6 +20,6 @@
   },
   "homepage": "git+https://github.com/MartinGris/MMM-GoogleMaps-Tracking#readme",
   "dependencies": {
-    "@googlemaps/markerwithlabel": "latest"
+    "@googlemaps/markerwithlabel": "^2.0.28"
   }
 }
