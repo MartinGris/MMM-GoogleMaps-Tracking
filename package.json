@@ -1,13 +1,15 @@
 {
   "name": "MMM-GoogleMaps-Tracking",
   "version": "2.1.0",
-  "description": "This module for the Magic Mirror to be able to show markers on a GoogleMap",
+  "description": "This is a module for MagicMirror² to be able to show markers on a Google Map",
   "repository": {
     "type": "git",
     "url": "git+github.com:MartinGris/MMM-GoogleMaps-Tracking.git"
   },
   "keywords": [
     "magic mirror",
+    "MagicMirror",
+    "MagicMirror²",
     "smart mirror",
     "module",
     "google maps",
